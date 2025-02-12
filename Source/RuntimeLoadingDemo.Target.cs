@@ -11,5 +11,7 @@ public class RuntimeLoadingDemoTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
 		ExtraModuleNames.Add("RuntimeLoadingDemo");
-	}
+        BuildEnvironment = TargetBuildEnvironment.Unique;
+        GlobalDefinitions.Add("FORCE_ANSI_ALLOCATOR = 1");
+    }
 }
