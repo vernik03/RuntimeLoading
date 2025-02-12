@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{8755AC00-4181-BBFE-2603-4F9953E52D03}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "RuntimeLoadingDemo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
