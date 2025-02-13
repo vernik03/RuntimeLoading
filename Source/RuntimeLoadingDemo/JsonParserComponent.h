@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -10,20 +9,22 @@
 USTRUCT(BlueprintType)
 struct FProductData
 {
-	GENERATED_BODY()
+	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString Name;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString ImagePath;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString ModelPath;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsLoaded = false;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnJsonDataParsed);
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class RUNTIMELOADINGDEMO_API UJsonParserComponent : public UActorComponent
