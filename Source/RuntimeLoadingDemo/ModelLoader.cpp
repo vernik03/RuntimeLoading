@@ -1,6 +1,9 @@
 
 
 #include "ModelLoader.h"
+#include "Engine/StaticMesh.h"
+#include "Components/StaticMeshComponent.h"
+#include "PhysicsEngine/BodySetup.h"
 
 
 AModelLoader::AModelLoader()
@@ -12,6 +15,53 @@ AModelLoader::AModelLoader()
 	ModelFilesManagerComponent = CreateDefaultSubobject<UModelFilesManagerComponent>(TEXT("ModelFilesManagerComponent"));
 
 }
+
+void AModelLoader::EnableActorsCollision(const TArray<AActor*>& ChildActors)
+{
+    for (AActor* Actor : ChildActors)
+    {
+        if (!Actor)
+        {
+            continue;
+        }
+
+		Actor->SetActorEnableCollision(true);
+
+        TArray<UStaticMeshComponent*> MeshComponents;
+        Actor->GetComponents<UStaticMeshComponent>(MeshComponents);
+
+		EnableComponentsCollision(MeshComponents);
+    }
+}
+
+void AModelLoader::EnableComponentsCollision(const TArray<UStaticMeshComponent*>& MeshComponents)
+{
+    for (UStaticMeshComponent* MeshComponent : MeshComponents)
+    {
+        if (!MeshComponent)
+        {
+            continue;
+        }
+
+        MeshComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+        MeshComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
+
+        UStaticMesh* StaticMesh = MeshComponent->GetStaticMesh();
+        if (StaticMesh)
+        {
+            UBodySetup* BodySetup = StaticMesh->GetBodySetup();
+            if (BodySetup)
+            {
+				BodySetup->bNeverNeedsCookedCollisionData = false;
+                BodySetup->CollisionTraceFlag = ECollisionTraceFlag::CTF_UseComplexAsSimple;
+                BodySetup->CreatePhysicsMeshes();
+            	MeshComponent->RecreatePhysicsState();				
+                GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Collision Enabled"));
+            }			
+        }
+    }
+}
+
 
 void AModelLoader::BeginPlay()
 {

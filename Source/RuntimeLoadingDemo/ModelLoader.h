@@ -33,6 +33,12 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Load")
 	void ProductDownloaded(const FString& ProductID);
 
+	UFUNCTION(BlueprintCallable)
+	void EnableActorsCollision(const TArray<AActor*>& ChildActors);
+
+	UFUNCTION(BlueprintCallable)
+	void EnableComponentsCollision(const TArray<UStaticMeshComponent*>& MeshComponents);
+
 protected:
 	virtual void BeginPlay() override;
 
