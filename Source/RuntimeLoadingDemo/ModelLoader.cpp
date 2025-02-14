@@ -55,8 +55,8 @@ void AModelLoader::EnableComponentsCollision(const TArray<UStaticMeshComponent*>
 				BodySetup->bNeverNeedsCookedCollisionData = false;
                 BodySetup->CollisionTraceFlag = ECollisionTraceFlag::CTF_UseComplexAsSimple;
                 BodySetup->CreatePhysicsMeshes();
-            	MeshComponent->RecreatePhysicsState();				
-                GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Collision Enabled"));
+            	MeshComponent->RecreatePhysicsState();
+				UE_LOG(LogTemp, Log, TEXT("Collision Enabled"));
             }			
         }
     }
