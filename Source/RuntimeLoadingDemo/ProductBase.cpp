@@ -6,6 +6,8 @@
 AProductBase::AProductBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 }
 
 void AProductBase::BeginPlay()

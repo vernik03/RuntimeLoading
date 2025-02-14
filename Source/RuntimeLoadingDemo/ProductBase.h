@@ -16,6 +16,9 @@ public:
 	AProductBase();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UStaticMeshComponent* MeshComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FProductData ProductData;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
