@@ -1,22 +1,29 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "JsonParserComponent.h"
+#include "ProceduralMeshComponent.h" 
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h" 
+#include "KismetProceduralMeshLibrary.h"
 #include "ProductBase.generated.h"
 
 UCLASS()
 class RUNTIMELOADINGDEMO_API AProductBase : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	AProductBase();
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UStaticMeshComponent* MeshComponent;
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(VisibleAnywhere, Category = "Runtime Mesh")
+	UProceduralMeshComponent* CombinedPMC;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FProductData ProductData;
@@ -24,10 +31,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString ProductID;
 
-protected:
-	virtual void BeginPlay() override;
-
-public:	
-	virtual void Tick(float DeltaTime) override;
-	
+	UFUNCTION(BlueprintCallable, Category = "Runtime Mesh")
+	void CombineMeshes(const TArray<UStaticMeshComponent*>& MeshComponents);
 };

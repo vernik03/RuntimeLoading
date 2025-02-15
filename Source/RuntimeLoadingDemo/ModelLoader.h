@@ -5,6 +5,7 @@
 #include "JsonParserComponent.h"
 #include "ModelFilesManagerComponent.h"
 #include "GameFramework/Actor.h"
+#include "Blueprint/UserWidget.h"
 #include "ModelLoader.generated.h"
 
 UCLASS()
@@ -38,6 +39,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EnableComponentsCollision(const TArray<UStaticMeshComponent*>& MeshComponents);
+
 
 protected:
 	virtual void BeginPlay() override;

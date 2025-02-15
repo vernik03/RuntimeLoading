@@ -4,6 +4,12 @@
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
 #include "PhysicsEngine/BodySetup.h"
+#include "Engine/Texture2D.h"
+#include "IImageWrapper.h"
+#include "IImageWrapperModule.h"
+#include "Components/Image.h"
+#include "Misc/FileHelper.h"
+#include "Modules/ModuleManager.h"
 
 
 AModelLoader::AModelLoader()
@@ -78,7 +84,7 @@ void AModelLoader::BeginPlay()
 		ModelFilesManagerComponent->OnProductFullyDownloaded.AddDynamic(this, &AModelLoader::ProductDownloaded);
 	}
 
-	JsonParserComponent->DownloadJson(JsonUrl);
+	//JsonParserComponent->DownloadJson(JsonUrl);
 	
 }
 
@@ -106,3 +112,4 @@ void AModelLoader::OnJsonDataParsed()
 	}
 
 }
+
